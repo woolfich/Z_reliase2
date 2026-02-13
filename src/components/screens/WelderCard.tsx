@@ -389,7 +389,16 @@ export default function WelderCard({ welder, state, onNavigate }: WelderCardProp
                 setShowOvertimeEditDialog(true);
               }
             }}
-            onTouchStart={() => {
+            onTouchStart={(e) => {
+              e.preventDefault(); // Предотвращаем стандартное поведение
+              if (availableToAdd > 0) {
+                setShowOvertimeDialog(true);
+              } else {
+                setShowOvertimeEditDialog(true);
+              }
+            }}
+            onTouchEnd={(e) => {
+              e.preventDefault(); // Предотвращаем стандартное поведение
               if (availableToAdd > 0) {
                 setShowOvertimeDialog(true);
               } else {
