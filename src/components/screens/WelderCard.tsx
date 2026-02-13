@@ -389,6 +389,13 @@ export default function WelderCard({ welder, state, onNavigate }: WelderCardProp
                 setShowOvertimeEditDialog(true);
               }
             }}
+            onTouchStart={() => {
+              if (availableToAdd > 0) {
+                setShowOvertimeDialog(true);
+              } else {
+                setShowOvertimeEditDialog(true);
+              }
+            }}
             className={`px-3 py-1 bg-amber-100 rounded-full self-start mt-2 ${availableToAdd > 0 || welder.overtime > 0 ? 'cursor-pointer hover:bg-amber-200 active:scale-95 transition-all' : ''}`}
           >
             <span className="text-sm font-medium text-amber-700">Переработка {formatNumber(welder.overtime)} ч</span>
