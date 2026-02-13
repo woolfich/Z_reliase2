@@ -381,24 +381,20 @@ export default function WelderCard({ welder, state, onNavigate }: WelderCardProp
         </ScrollArea>
 
         {welder.overtime > 0 && (
-          <div className="flex gap-2">
-            <div
-              onClick={() => availableToAdd > 0 && setShowOvertimeDialog(true)}
-              className={`px-3 py-1 bg-amber-100 rounded-full self-start mt-2 ${availableToAdd > 0 ? 'cursor-pointer hover:bg-amber-200 active:scale-95 transition-all' : ''}`}
-            >
-              <span className="text-sm font-medium text-amber-700">Переработка {formatNumber(welder.overtime)} ч</span>
-              {availableToAdd > 0 && (
-                <span className="text-xs text-amber-600 block text-center">+{formatNumber(availableToAdd)} ч</span>
-              )}
-            </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setShowOvertimeDialog(true)}
-              className="h-8 w-8 p-0 self-start mt-2"
-            >
-              <span className="text-xs">✏️</span>
-            </Button>
+          <div
+            onClick={() => {
+              if (availableToAdd > 0) {
+                setShowOvertimeDialog(true);
+              } else {
+                setShowOvertimeEditDialog(true);
+              }
+            }}
+            className={`px-3 py-1 bg-amber-100 rounded-full self-start mt-2 ${availableToAdd > 0 || welder.overtime > 0 ? 'cursor-pointer hover:bg-amber-200 active:scale-95 transition-all' : ''}`}
+          >
+            <span className="text-sm font-medium text-amber-700">Переработка {formatNumber(welder.overtime)} ч</span>
+            {availableToAdd > 0 && (
+              <span className="text-xs text-amber-600 block text-center">+{formatNumber(availableToAdd)} ч</span>
+            )}
           </div>
         )}
       </div>
